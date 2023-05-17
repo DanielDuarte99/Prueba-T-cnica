@@ -14,16 +14,17 @@ def window_init(): # Definición de la ventana inicial.
     Label(text="").pack()
     Button(text="Login / Acceder", height = "2", width = "30", bg = color_pestana, command = login).pack() # Se establece el boton de "Login" con una altura, una anchura y un fondo para la opción, además de "command" con la función que ejecutarán. 
     Label (text="").pack() 
-    Button(text="Sing Up / Registrarse", height = "2", width = "30", bg = color_pestana, command = registro).pack()
+    Button(text="Sing Up / Registrarse", height = "2", width = "30", bg = color_pestana, command = registro).pack() # Se establece el boton de "Registro" con una altura, una anchura y un fondo para la opción, además de "command" con la función que ejecutarán. 
     Label (text="").pack()
     window_p.mainloop()
     
-def registro():
-    global window_regis
+def registro(): #Se define la función de registro.
+    global window_regis # Se establecen las caracterpisticas de la ventana de registro.
     window_regis = Toplevel(window_p)
     window_regis.title("Sing Up / Registro")
-    window_regis.geometry("400x350")
+    window_regis.geometry("400x350") 
     
+    #Se declaran las variables a utilizar en el apartado de registro.
     global nombre
     global apellido 
     global username
@@ -39,8 +40,9 @@ def registro():
     apellido = StringVar()
     username = StringVar()
     email = StringVar()
-    password = StringVar ()
-        
+    password = StringVar()
+    
+    # Aquí se configuran los cuadros de texto en donde serán ingresados y capturados los datos.    
     Label(window_regis, text = "Introduce tus datos", bg = "lightseagreen").pack()
     Label(window_regis, text = "").pack()
     
@@ -72,8 +74,9 @@ def registro():
     Label(window_regis, text = "").pack()
     Button(window_regis, text = "Registrate", width = 10, height = 1, bg = "lightseagreen", command = registro_user).pack()
 
+# Aquí se declara la función de captura de datos en la ventana de registro. 
 def registro_user():
-    name_info = nombre.get()
+    name_info = nombre.get() 
     lname_info = apellido.get()
     email_info = email.get()
     user_info = username.get()
@@ -93,9 +96,9 @@ def registro_user():
     entry_email.delete(0,END)
     entry_pass.delete(0, END)
     
-    Label(window_regis, text="¡Enhorabuena! \n Te has registrado con éxito.", fg="green", font=("Times New Roman", 10)).pack()
+    Label(window_regis, text="¡Enhorabuena! \n Te has registrado con éxito.", fg="green", font=("Times New Roman", 10)).pack() # Confirmación del registro.
 
-def login():
+def login(): #Definimos la función de Login, personalizando la ventana de dicha función como en Registro.
     global window_login
     window_login = Toplevel(window_p)
     window_login.title("Iniciar Sesión")
@@ -126,14 +129,14 @@ def login():
     
     Button(window_login, text = "Login", width = 10, height = 1, bg = "lightseagreen", command = v_login).pack()
 
-def v_login():
+def v_login(): #De igual manera que en el registro, se capturan los datos.
     user1 = v_user.get()
     password1 = v_password.get()
     
     entry_login_user.delete(0, END)
     entry_login_pass.delete(0, END)
     
-    list_files = os.listdir()#
+    list_files = os.listdir()# Aquí se comparan los datos en la parte de login y se da una respuesta, ya sea positiva o negativa y cual es el motivo de esta última.
     if user1 in list_files:
         file1 = open(user1, "r")
         verifica = file1.read().splitlines()
@@ -145,7 +148,8 @@ def v_login():
     
     else:
         fail_user()
-        
+
+# Se definen las acciones de las respuestas obtenidas por el Login, en caso de éxito, usuario incorrecto o contraseña incorrecta en ese orden.        
 def exito_login():
     global window_exito
     window_exito = Toplevel(window_login)
@@ -175,7 +179,8 @@ def fail_password():
     Label(window_fail_pass, text = "Contraseña incorrecta, corrobora los datos ingresados.", fg = "red").pack()
     
     Button(window_fail_pass, text = "OK", command = delete_fail_pass).pack()
-    
+
+#Definimos el cierre de las ventanas.    
 def delete_exito_login():
     window_exito.destroy()
     
@@ -184,7 +189,8 @@ def delete_fail_user():
     
 def delete_fail_pass():
     window_fail_pass.destroy()
-    
+
+#Se invoca la ventana inicial.     
 window_init()
     
     
